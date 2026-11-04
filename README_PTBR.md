@@ -186,8 +186,9 @@ Status: Disponível
 
 ### Demonstração
 
-![Consulta de Produtos](examples/demos/consulta_produto.gif)
-
+<p align="center">
+  <img src="examples/demos/consulta_produto.gif" width="900">
+</p>
 ---
 
 ### Consulta de Pedidos
@@ -207,7 +208,9 @@ Código de rastreamento: BRJL5544332BR
 
 ### Demonstração
 
-![Consulta de Pedidos](examples/demos/consulta_pedido.gif)
+<p align="center">
+  <img src="examples/demos/consulta_pedido.gif" width="900">
+</p>
 
 ---
 
@@ -229,7 +232,9 @@ Preço promocional
 
 ### Demonstração
 
-![Consulta de Promoções](examples/demos/consulta_promocoes.gif)
+<p align="center">
+  <img src="examples/demos/consulta_promocoes.gif" width="900">
+</p>
 
 ---
 
@@ -248,7 +253,9 @@ Compras online podem ser devolvidas em até 7 dias corridos após o recebimento.
 
 ### Demonstração
 
-![Consulta de Políticas](examples/demos/politica_devolucao.gif)
+<p align="center">
+  <img src="examples/demos/politica_devolucao.gif" width="900">
+</p>
 
 ---
 
@@ -258,7 +265,9 @@ Quando um produto possui estoque igual a zero, o agente informa a indisponibilid
 
 ### Demonstração
 
-![Produto Sem Estoque](examples/demos/sem_estoque.gif)
+<p align="center">
+  <img src="examples/demos/sem_estoque.gif" width="900">
+</p>
 
 ---
 
@@ -268,7 +277,9 @@ Quando um produto está descontinuado, o agente informa a situação e recomenda
 
 ### Demonstração
 
-![Produto Descontinuado](examples/demos/descontinuado.gif)
+<p align="center">
+  <img src="examples/demos/descontinuado.gif" width="900">
+</p>
 
 ---
 
@@ -278,7 +289,9 @@ Produtos marcados como `coming_soon` recebem tratamento específico.
 
 ### Demonstração
 
-![Produto em Pré-venda](examples/demos/coming_soon.gif)
+<p align="center">
+  <img src="examples/demos/coming_soon.gif" width="900">
+</p>
 
 ---
 
@@ -295,7 +308,9 @@ O agente reconhece produtos que não são comercializados pela loja, como:
 
 ### Demonstração
 
-![Itens Fora do Catálogo](examples/demos/itens_fora_de_catalogo.gif)
+<p align="center">
+  <img src="examples/demos/itens_fora_do_catalogo.gif" width="900">
+</p>
 
 Nesses casos, a resposta segue as regras definidas no manual da loja.
 

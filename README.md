@@ -186,7 +186,9 @@ Status: Available
 
 ### Demo
 
-examples/demos/consulta_produto.gif
+<p align="center">
+  <img src="examples/demos/consulta_produto.gif" width="900">
+</p>
 
 ---
 
@@ -207,7 +209,9 @@ Tracking Code: BRJL5544332BR
 
 ### Demo
 
-examples/demos/consulta_pedido.gif
+<p align="center">
+  <img src="examples/demos/consulta_pedido.gif" width="900">
+</p>
 
 ---
 
@@ -229,7 +233,9 @@ Promotional Price
 
 ### Demo
 
-examples/demos/consulta_promocoes.gif
+<p align="center">
+  <img src="examples/demos/consulta_promocoes.gif" width="900">
+</p>
 
 ---
 
@@ -248,8 +254,9 @@ Online purchases can be returned within 7 calendar days after delivery.
 
 ### Demo
 
-examples/demos/politica_devolucao.gif
-
+<p align="center">
+  <img src="examples/demos/politica_devolucao.gif" width="900">
+</p>
 ---
 
 ### Out-of-Stock Products
@@ -258,7 +265,9 @@ When a product has zero stock available, the agent informs the customer and sugg
 
 ### Demo
 
-examples/demos/sem_estoque.gif
+<p align="center">
+  <img src="examples/demos/sem_estoque.gif" width="900">
+</p>
 
 ---
 
@@ -268,7 +277,9 @@ When a product is discontinued, the agent informs the customer and recommends si
 
 ### Demo
 
-examples/demos/descontinuado.gif
+<p align="center">
+  <img src="examples/demos/descontinuado.gif" width="900">
+</p>
 
 ---
 
@@ -278,7 +289,9 @@ Products marked as `coming_soon` receive special handling.
 
 ### Demo
 
-examples/demos/coming_soon.gif
+<p align="center">
+  <img src="examples/demos/coming_soon.gif" width="900">
+</p>
 
 ---
 
@@ -295,7 +308,9 @@ The agent recognizes products that are not sold by the store, such as:
 
 ### Demo
 
-examples/demos/itens_fora_de_catalogo.gif
+<p align="center">
+  <img src="examples/demos/itens_fora_do_catalogo.gif" width="900">
+</p>
 
 In these cases, the response follows the business rules defined in the store manual.
 
