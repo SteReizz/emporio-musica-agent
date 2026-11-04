@@ -1,262 +1,327 @@
+# ♪ Empório da Música - AI Customer Service Agent ♪ 
 
-===============================================
-♪ Empório da Música - AI Customer Service Agent
-=============================================== 
+## Overview
 
-♪ VISÃO GERAL ♪ 
+This project implements a customer service agent for the fictional music store **Empório da Música**.
 
-Este projeto implementa um agente de atendimento para a loja fictícia Empório da Música.
+The agent is capable of answering questions about:
 
-O agente é capaz de responder perguntas sobre:
+- Available products
+- Order status
+- Active promotions
+- Store policies
+- Special scenarios such as out-of-stock, discontinued, and pre-order products
 
-- Produtos disponíveis
-- Status de pedidos
-- Promoções ativas
-- Políticas da loja
-- Situações especiais, como produtos sem estoque, descontinuados e em pré-venda
+The goal of this project is to provide a simple customer service experience by consolidating information distributed across multiple sources and delivering consistent responses according to the business rules defined in the challenge.
 
-O objetivo é criar uma experiência simples de atendimento ao cliente, reunindo informações distribuídas em diferentes fontes e fornecendo respostas consistentes de acordo com as regras de negócio definidas no desafio.
+---
 
-♪ TECNOLOGIAS UTILIZADAS ♪
+## Technologies Used
 
 - Python 3.14
 - Pandas
 - RapidFuzz
 - Pytest
-- Processamento de PDF
+- PDF Processing
 - CLI (Command Line Interface)
-- Arquitetura
 
-Para desenvolver o agente optei por separar as responsabilidades de acordo com o domínio das informações consultadas:
+---
 
-Perguntas sobre produtos → são respondidas pelo catálogo.
-Perguntas sobre pedidos → consultam a base de pedidos.
-Perguntas sobre promoções → acessam a base promocional.
-Questões sobre trocas, devoluções, garantia e frete → são respondidas a partir do manual da loja.
+## Architecture
 
-Essa organização mantém o código simples, facilita manutenção futura e melhora a consistência das respostas.
+To develop the agent, I chose to separate responsibilities according to the domain of the information being queried.
 
+- Product-related questions → answered through the product catalog.
+- Order-related questions → answered through the orders database.
+- Promotion-related questions → answered through the promotions database.
+- Questions regarding returns, exchanges, warranties, and shipping → answered using the store policy manual.
 
-          Usuário
-             │
-             ▼
-      Customer Agent
-             │
-┌────────────┼─────────────┐
-▼            ▼             ▼
-ProductTool OrderTool PromotionTool
-     │       │             │
-products.csv orders.csv promotions.csv
- 
-            │
-            ▼
-        PolicyRAG
-            │
-            ▼
-    politicas_da_loja.pdf
+This organization keeps the code simple, facilitates future maintenance, and improves response consistency.
 
-Cada componente possui uma responsabilidade clara, reduzindo a complexidade do sistema e facilitando futuras evoluções.
+```text
+                User
+                    │
+                    ▼
+          AI Customer Service Agent
+                    │
+      ┌─────────────┼─────────────┐
+      ▼             ▼             ▼
+ ProductTool   OrderTool   PromotionTool
+      │             │             │
+ products.csv  orders.csv  promotions.csv
 
-♪ DIFERENCIAIS ♪
+                    │
+                    ▼
+               PolicyRAG
+                    │
+                    ▼
+        politicas_da_loja.pdf
+```
 
-- Busca aproximada utilizando RapidFuzz.
-- Sugestão de alternativas para produtos sem estoque.
-- Tratamento de produtos descontinuados.
-- Tratamento de produtos em pré-venda.
-- Separação clara de responsabilidades por domínio.
-- Cobertura de testes automatizados.
-- Estrutura preparada para futura integração com LLM.
+Each component has a clear responsibility, reducing system complexity and facilitating future improvements.
 
+---
 
-♪ DECISÕES TÉCNICAS ♪
+## Key Features
 
-→ Abordagem
+- Approximate search using RapidFuzz
+- Alternative product suggestions for out-of-stock items
+- Discontinued product handling
+- Pre-order product handling
+- Clear separation of responsibilities by domain
+- Automated testing coverage
+- Architecture prepared for future LLM integration
 
-Optei por uma solução baseada em dados estruturados, na qual cada consulta é direcionada para o componente responsável por aquele domínio.
+---
 
-Por exemplo:
+## Technical Decisions
 
-Perguntas sobre produtos → consultam o catálogo.
-Perguntas sobre pedidos  → consultam a base de pedidos.
-Perguntas sobre promoções  → consultam a tabela de promoções.
-Perguntas sobre políticas  → utilizam o manual da loja.
+### Approach
 
-Essa abordagem foi escolhida porque os dados fornecidos no desafio já estavam organizados e estruturados, permitindo respostas precisas sem a necessidade de adicionar complexidade desnecessária ao projeto.
+I chose a structured-data-based approach in which each query is routed to the component responsible for the corresponding domain.
 
-→ Modelo e Provedor
+For example:
 
-Inicialmente considerei utilizar um Large Language Model (LLM) para responder às perguntas dos clientes.
+- Product-related questions query the catalog.
+- Order-related questions query the orders database.
+- Promotion-related questions query the promotions table.
+- Policy-related questions use the store policy manual.
 
-Após analisar os requisitos e os dados fornecidos, concluí que a maior parte das consultas poderia ser respondida diretamente através dos arquivos CSV e do manual da loja.
+This approach was chosen because the challenge data was already well-structured, allowing accurate responses without adding unnecessary complexity to the project.
 
-Dessa forma, optei por uma solução mais simples, transparente e fácil de executar pelos avaliadores, sem exigir:
+### Model and Provider
 
-- Chaves de API
-- Créditos em provedores externos
-- Configurações adicionais
+Initially, I considered using a Large Language Model (LLM) to answer customer questions.
 
-A solução foi estruturada de forma modular, permitindo a futura integração de um LLM sem alterações significativas na camada de dados.
+After analyzing the challenge requirements and the provided data, I concluded that most queries could be answered directly using CSV files and the store policy manual.
 
-→ Interface de Interação
+As a result, I opted for a simpler, more transparent solution that can be easily executed by evaluators without requiring:
 
-Foi utilizada uma interface CLI (Command Line Interface).
+- API keys
+- External provider credits
+- Additional configuration
 
-Motivações:
+The solution was designed with a modular architecture, allowing future integration of an LLM without significant changes to the data layer.
 
-- Simplicidade
-- Facilidade de avaliação
-- Foco na lógica do agente
-- Baixa dependência de infraestrutura
+### User Interface
 
-Exemplo:
+The project uses a CLI (Command Line Interface).
 
-Cliente:
+Motivations:
+
+- Simplicity
+- Ease of evaluation
+- Focus on business logic
+- Minimal infrastructure dependencies
+
+Example:
+
+```text
+Customer:
 Qual o status do pedido 8?
- 
-Assistente:
+
+Assistant:
 Seu pedido já foi enviado e está em transporte.
-Persistência de Histórico
+```
 
-Não foi implementada persistência de conversas.
+### Conversation History
 
-Durante o desenvolvimento, priorizei os principais objetivos do desafio:
+Conversation history persistence was not implemented.
 
-- Consulta de produtos
-- Consulta de pedidos
-- Consulta de promoções
-- Consulta de políticas
+During development, I prioritized the main goals of the challenge:
 
-Para os cenários propostos as consultas são independentes e não exigem manutenção de contexto entre interações.
+- Product queries
+- Order queries
+- Promotion queries
+- Policy queries
 
-Em um cenário de produção, a persistência de histórico poderia ser adicionada para permitir atendimento contextual e retomada de conversas anteriores.
+For the proposed scenarios, queries are independent and do not require conversational context between interactions.
 
-→ Tratamento dos Dados
+In a production environment, conversation history could be added to support contextual assistance and conversation continuity.
 
-Os dados estruturados foram carregados utilizando Pandas.
+### Data Processing
 
-Foram implementadas validações para:
+Structured data is loaded using Pandas.
 
-- Produtos sem estoque
-- Produtos descontinuados
-- Produtos em pré-venda ("coming soon")
-- Produtos fora do catálogo da empresa
+Validations were implemented for:
 
-Também foi utilizada busca aproximada com RapidFuzz para melhorar a experiência do usuário.
+- Out-of-stock products
+- Discontinued products
+- Pre-order products ("coming soon")
+- Products outside the company's catalog
 
-Exemplo:
+RapidFuzz was also used to provide approximate matching and improve the user experience.
 
-Entrada:
+Example:
+
+```text
+Input:
 Takamine GD20
- 
-Resultado encontrado:
+
+Matched Product:
 Takamine GD20 Dreadnought Natural
+```
 
+---
 
-♪ FUNCIONALIDADES IMPLEMENTADAS ♪
+## Implemented Functionalities
 
-→ Consulta de Produtos
+> **Note:** The example queries below remain in Portuguese because the agent was designed and tested using the original challenge dataset and business rules provided in Portuguese.
 
-Exemplo:
+### Product Search
 
-Cliente:
+Example:
+
+```text
+Customer:
 Takamine GD20
- 
-Resposta:
- 
-Produto: Takamine GD20 Dreadnought Natural
-Preço: R$ 2199,00
-Estoque: 5
-Status: Disponível
 
-→ Consulta de Pedidos
+Response:
 
-Exemplo:
+Product: Takamine GD20 Dreadnought Natural
+Price: R$ 2199.00
+Stock: 5
+Status: Available
+```
 
-Cliente:
+### Demo
+
+examples/demos/consulta_produto.gif
+
+---
+
+### Order Lookup
+
+Example:
+
+```text
+Customer:
 Qual o status do pedido 8?
- 
-Resposta:
- 
-Pedido: 8
+
+Response:
+
+Order: 8
 Status: Seu pedido já foi enviado e está em transporte.
-Código de rastreamento: BRJL5544332BR
+Tracking Code: BRJL5544332BR
+```
 
-→ Consulta de Promoções
+### Demo
 
-Exemplo:
+examples/demos/consulta_pedido.gif
 
-Cliente:
+---
+
+### Promotions Lookup
+
+Example:
+
+```text
+Customer:
 Quais promoções estão ativas?
- 
-Resposta:
- 
-Produto
-Preço original
-Desconto
-Preço promocional
 
+Response:
 
-→ Consulta de Políticas
+Product
+Original Price
+Discount
+Promotional Price
+```
 
-Exemplo:
+### Demo
 
-Cliente:
+examples/demos/consulta_promocoes.gif
+
+---
+
+### Store Policy Lookup
+
+Example:
+
+```text
+Customer:
 Posso devolver um produto?
- 
-Resposta:
-Compras online podem ser devolvidas em até 7 dias corridos após o recebimento.
-Regras de Negócio Implementadas
 
+Response:
 
-→ Produto sem estoque
+Online purchases can be returned within 7 calendar days after delivery.
+```
 
-Quando um produto possui estoque igual a zero, o agente sugere alternativas da mesma categoria.
+### Demo
 
+examples/demos/politica_devolucao.gif
 
-→ Produto descontinuado
+---
 
-Quando um produto está descontinuado, o agente informa a situação e sugere modelos semelhantes.
+### Out-of-Stock Products
 
+When a product has zero stock available, the agent informs the customer and suggests alternatives from the same category.
 
-→ Produto em pré-venda
+### Demo
 
-Produtos marcados como coming_soon recebem tratamento específico.
+examples/demos/sem_estoque.gif
 
+---
 
-→ Itens fora do catálogo
+### Discontinued Products
 
-O agente reconhece itens não comercializados pela loja, como:
+When a product is discontinued, the agent informs the customer and recommends similar alternatives.
 
-- Cordas
-- Cabos
-- Pedais
+### Demo
+
+examples/demos/descontinuado.gif
+
+---
+
+### Pre-Order Products
+
+Products marked as `coming_soon` receive special handling.
+
+### Demo
+
+examples/demos/coming_soon.gif
+
+---
+
+### Items Outside the Catalog
+
+The agent recognizes products that are not sold by the store, such as:
+
+- Strings
+- Cables
+- Pedals
 - Cases
-- Amplificadores
-- Palhetas
+- Amplifiers
+- Guitar picks
 
-Nesses casos, responde adequadamente conforme as regras definidas no manual.
+### Demo
 
+examples/demos/itens_fora_de_catalogo.gif
 
-♪ ESTRUTURA DO PROJETO ♪
+In these cases, the response follows the business rules defined in the store manual.
 
+---
 
+## Project Structure
+
+```text
 emporio-musica-agent/
 │
 ├── data/
-│ ├── categories.csv
-│ ├── customers.csv
-│ ├── order_items.csv
-│ ├── orders.csv
-│ ├── politicas_da_loja.pdf
-│ ├── products.csv
-│ └── promotions.csv
+│   ├── categories.csv
+│   ├── customers.csv
+│   ├── order_items.csv
+│   ├── orders.csv
+│   ├── politicas_da_loja.pdf
+│   ├── products.csv
+│   └── promotions.csv
 │
 ├── examples/
+│   └── demos/
 │
 ├── src/
-│ ├── data_loader.py
-│ ├── rag.py
-│ └── tools.py
+│   ├── data_loader.py
+│   ├── rag.py
+│   └── tools.py
 │
 ├── tests/
 │
@@ -264,82 +329,105 @@ emporio-musica-agent/
 ├── main.py
 ├── README.md
 └── requirements.txt
+```
 
+---
 
-♪ COMO EXECUTAR ♪ 
+## How to Run
 
-Abra seu Prompt de Comando / PowerShell e siga os passos à seguir:
+Open your Command Prompt or PowerShell and follow these steps:
 
-1. Criar ambiente virtual
+### 1. Create a virtual environment
 
+```bash
 python -m venv ambiente_virtual
+```
 
-2. Ativar ambiente virtual
+### 2. Activate the virtual environment
 
+Windows:
+
+```bash
 ambiente_virtual\Scripts\activate
- 
-3. Instalar dependências
+```
 
+### 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-4. Executar o projeto
+### 4. Run the project
 
+```bash
 python main.py
+```
 
+---
 
-♪ TESTES ♪ 
+## Tests
 
-Para executar os testes automatizados:
+To run the automated tests:
 
-Em seu Prompt de Comando, digite:
-
+```bash
 python -m pytest
+```
 
-Os testes validam:
+The test suite validates:
 
-- Consulta de produtos
-- Busca aproximada
-- Pedidos
-- Promoções
-- Políticas da loja
+- Product queries
+- Approximate matching
+- Order lookups
+- Promotions
+- Store policies
 
+### Current Result
 
-→ Resultado atual
-
+```text
 platform win32 -- Python 3.14
 collected 7 items
- 
+
 7 passed
-Limitações
-Não possui memória conversacional.
-Não utiliza LLM para geração de respostas.
-A consulta ao manual utiliza regras simples em vez de embeddings vetoriais.
-Não possui interface web.
-O Que Eu Faria Com Mais Tempo
 
 
-Prioridades para uma evolução futura:
 
-- Integração com LLM utilizando Function Calling
-- RAG vetorial baseado em embeddings
-- LangGraph para orquestração do agente
-- Interface web
-- Memória conversacional
-- Testes de integração
+## Limitations
+
+- No conversation memory.
+- Does not use an LLM to generate responses.
+- Policy lookup relies on rule-based retrieval rather than vector embeddings.
+- No web interface.
+
+---
+
+## Future Improvements
+
+Given additional development time, I would prioritize:
+
+- LLM integration using Function Calling
+- Embedding-based Vector RAG
+- LangGraph for agent orchestration
+- Web interface
+- Conversation memory
+- Integration testing
+- Docker containerization
+
+---
+
+## AI Assistant Usage
+
+Microsoft Copilot was used during development for:
+
+- Technical clarification
+- Architecture discussions
+- Documentation review
+- Project structure organization
+- Implementation support
+
+All architectural decisions, component adaptations, testing, and result validation were performed manually.
 
 
-♪ USO DE ASSISTENTE DE IA ♪
 
-Foi utilizado o Copilot como ferramenta de apoio durante o desenvolvimento para:
+## Conclusion
 
-- Esclarecimento de dúvidas técnicas
-- Discussão de arquitetura
-- Revisão da documentação
-- Organização da estrutura do projeto
-- Apoio na implementação
-
-Todas as decisões de arquitetura, adaptações dos componentes e validações dos resultados foram realizadas manualmente.
-
-♪ CONCLUSÃO ♪
-
-A solução proposta atende aos requisitos do desafio por meio de uma arquitetura simples, modular e de fácil manutenção, priorizando a confiabilidade, transparência e facilidade de avaliação. Além de cumprir os cenários solicitados, a estrutura do projeto foi preparada para futuras evoluções, incluindo integração com LLMs, RAG vetorial e interfaces mais avançadas.
+The proposed solution fulfills the challenge requirements through a simple, modular, and maintainable architecture that prioritizes reliability, transparency, and ease of evaluation. In addition to covering all requested scenarios, the project structure was intentionally designed to support future enhancements, including LLM integration, Vector RAG, conversational memory, and more advanced user interfaces.
