@@ -226,11 +226,10 @@ Customer:
 Quais promoções estão ativas?
 
 Response:
-
-Product
-Original Price
-Discount
-Promotional Price
+Product: Kalani KAL-700T Tenor Natural
+Original Price: R$ 359.0
+Discount: 10.0%
+Promotional Price: R$ 323.1 
 ```
 
 ### Demo
@@ -266,13 +265,6 @@ Online purchases can be returned within 7 calendar days after delivery.
 
 When a product has zero stock available, the agent informs the customer and suggests alternatives from the same category.
 
-Example:
-
-```text
-Customer:
-Vocês têm o Giannini GF-3D Dreadnought Sunburst?
-```
-
 ### Demo
 
 <p align="center">
@@ -285,12 +277,6 @@ Vocês têm o Giannini GF-3D Dreadnought Sunburst?
 
 When a product is discontinued, the agent informs the customer and recommends similar alternatives.
 
-Example:
-
-```text
-Customer:
-Vocês têm o Shelby SN-7C 7 Cordas Nylon Natural?
-```
 
 ### Demo
 
@@ -303,13 +289,6 @@ Vocês têm o Shelby SN-7C 7 Cordas Nylon Natural?
 ### Pre-Order Products
 
 Products marked as `coming_soon` receive special handling.
-
-Example:
-
-```text
-Customer:
-Vocês têm o Kala KA-ABP-CTG Barítono Cedar?
-```
 
 ### Demo
 
@@ -329,13 +308,6 @@ The agent recognizes products that are not sold by the store, such as:
 - Cases
 - Amplifiers
 - Guitar Picks
-
-Example:
-
-```text
-Customer:
-Vocês vendem cabos?
-```
 
 ### Demo
 
