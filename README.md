@@ -489,8 +489,6 @@ All architectural decisions, component adaptations, test design, execution, and 
 
 ## Conclusion
 
-## Conclusion
-
 The proposed solution fulfills the challenge requirements through a simple, modular, and maintainable architecture that prioritizes reliability, transparency, and ease of evaluation.
 
 In addition to covering all requested scenarios, the project structure was intentionally designed to support future enhancements, including LLM integration, Vector RAG, conversational memory, and more advanced user interfaces.
