@@ -350,7 +350,25 @@ emporio-musica-agent/
 
 ## Como Executar
 
-Abra o Prompt de Comando ou PowerShell e siga os passos abaixobash
+Abra o Prompt de Comando ou PowerShell e siga os passos abaixo:
+
+### 1. Criar um ambiente virtual
+
+```bash
+python -m venv ambiente_virtual
+```
+
+### 2. Ativar o ambiente virtual
+
+Windows:
+
+```bash
+ambiente_virtual\Scripts\activate
+```
+
+### 3. Instalar as dependências
+
+```bash
 pip install -r requirements.txt
 ```
 
@@ -370,13 +388,19 @@ Para executar os testes automatizados:
 python -m pytest
 ```
 
-Os testes validam:
+### Demonstração
+
+<p align="center">
+  <img src="examples/demos/testes_demo.gif" width="900">
+</p>
+
+A suíte de testes valida:
 
 - Consulta de produtos
 - Busca aproximada
 - Consulta de pedidos
 - Consulta de promoções
-- Consulta de políticas
+- Consulta de políticas da loja
 
 ### Resultado Atual
 
@@ -386,6 +410,8 @@ collected 7 items
 
 7 passed
 ```
+
+Todos os testes automatizados foram executados com sucesso, validando as principais funcionalidades e regras de negócio implementadas no agente.
 
 ---
 

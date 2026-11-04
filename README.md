@@ -168,6 +168,8 @@ Takamine GD20 Dreadnought Natural
 
 > **Note:** The example queries below remain in Portuguese because the agent was designed and tested using the original challenge dataset and business rules provided in Portuguese.
 
+---
+
 ### Product Search
 
 Example:
@@ -257,11 +259,19 @@ Online purchases can be returned within 7 calendar days after delivery.
 <p align="center">
   <img src="examples/demos/politica_devolucao.gif" width="900">
 </p>
+
 ---
 
 ### Out-of-Stock Products
 
 When a product has zero stock available, the agent informs the customer and suggests alternatives from the same category.
+
+Example:
+
+```text
+Customer:
+Vocês têm o Giannini GF-3D Dreadnought Sunburst?
+```
 
 ### Demo
 
@@ -275,6 +285,13 @@ When a product has zero stock available, the agent informs the customer and sugg
 
 When a product is discontinued, the agent informs the customer and recommends similar alternatives.
 
+Example:
+
+```text
+Customer:
+Vocês têm o Shelby SN-7C 7 Cordas Nylon Natural?
+```
+
 ### Demo
 
 <p align="center">
@@ -286,6 +303,13 @@ When a product is discontinued, the agent informs the customer and recommends si
 ### Pre-Order Products
 
 Products marked as `coming_soon` receive special handling.
+
+Example:
+
+```text
+Customer:
+Vocês têm o Kala KA-ABP-CTG Barítono Cedar?
+```
 
 ### Demo
 
@@ -304,12 +328,19 @@ The agent recognizes products that are not sold by the store, such as:
 - Pedals
 - Cases
 - Amplifiers
-- Guitar picks
+- Guitar Picks
+
+Example:
+
+```text
+Customer:
+Vocês vendem cabos?
+```
 
 ### Demo
 
 <p align="center">
-  <img src="examples/demos/itens_fora_do_catalogo.gif" width="900">
+  <img src="examples/demos/itens_fora_de_catalogo.gif" width="900">
 </p>
 
 In these cases, the response follows the business rules defined in the store manual.
@@ -350,7 +381,7 @@ emporio-musica-agent/
 
 ## How to Run
 
-Open your Command Prompt or PowerShell and follow these steps:
+Open Command Prompt or PowerShell and follow the steps below:
 
 ### 1. Create a virtual environment
 
@@ -388,13 +419,19 @@ To run the automated tests:
 python -m pytest
 ```
 
+### Demo
+
+<p align="center">
+  <img src="examples/demos/testes_demo.gif" width="900">
+</p>
+
 The test suite validates:
 
 - Product queries
 - Approximate matching
 - Order lookups
 - Promotions
-- Store policies
+- Store policy retrieval
 
 ### Current Result
 
@@ -403,10 +440,15 @@ platform win32 -- Python 3.14
 collected 7 items
 
 7 passed
+```
 
+All automated tests were executed successfully, validating the agent's core functionalities and business rules.
 
+---
 
 ## Limitations
+
+The current implementation prioritizes simplicity, transparency, and ease of evaluation. As a result, some advanced capabilities commonly found in production-grade AI assistants were intentionally left out of scope.
 
 - No conversation memory.
 - Does not use an LLM to generate responses.
@@ -417,32 +459,38 @@ collected 7 items
 
 ## Future Improvements
 
-Given additional development time, I would prioritize:
+Given additional development time, I would prioritize the following enhancements:
 
-- LLM integration using Function Calling
-- Embedding-based Vector RAG
-- LangGraph for agent orchestration
-- Web interface
-- Conversation memory
-- Integration testing
-- Docker containerization
+- LLM integration using Function Calling.
+- Embedding-based Vector RAG.
+- LangGraph for agent orchestration.
+- Web interface.
+- Conversation memory.
+- Integration testing.
+- Docker containerization.
+
+These improvements would make the solution more scalable, flexible, and closer to a production-ready customer service assistant.
 
 ---
 
 ## AI Assistant Usage
 
-Microsoft Copilot was used during development for:
+Microsoft Copilot was used during development as a support tool for:
 
-- Technical clarification
-- Architecture discussions
-- Documentation review
-- Project structure organization
-- Implementation support
+- Technical clarification.
+- Architecture discussions.
+- Documentation review.
+- Project structure organization.
+- Implementation support.
 
-All architectural decisions, component adaptations, testing, and result validation were performed manually.
+All architectural decisions, component adaptations, test design, execution, and validation of results were performed manually.
 
-
+---
 
 ## Conclusion
 
-The proposed solution fulfills the challenge requirements through a simple, modular, and maintainable architecture that prioritizes reliability, transparency, and ease of evaluation. In addition to covering all requested scenarios, the project structure was intentionally designed to support future enhancements, including LLM integration, Vector RAG, conversational memory, and more advanced user interfaces.
+## Conclusion
+
+The proposed solution fulfills the challenge requirements through a simple, modular, and maintainable architecture that prioritizes reliability, transparency, and ease of evaluation.
+
+In addition to covering all requested scenarios, the project structure was intentionally designed to support future enhancements, including LLM integration, Vector RAG, conversational memory, and more advanced user interfaces.
